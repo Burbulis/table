@@ -2,15 +2,23 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mem.h"
+#include "cells.h"
 
-
-void main (void)
+int main(int argc, char* argv[])
 {
-  char x[]="test!!!!";
-  unsigned int size = strlen(x); 
-  ADD_TABLE(x,size);
-  char *out_;
-  get_by_index(0,&out_);
-  printf("test:%s\n",out_);
+
+   if (argc > 1)
+   {
+     for (int i = 1; i < argc ; ++i)
+     {
+        printf("%s\n",argv[i]);
+        struct _cell cell = CELL(argv[i]);
+        SET_CELL(cell);
+     }
+   }
+   struct _cell cell = CELL("C0:0");
+   unsigned int x = GET_CELL(cell);
+   printf("(%c,%ld)=%d\n",cell.c.name,cell.c.index,x);
+
 }
 

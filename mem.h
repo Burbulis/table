@@ -5,37 +5,32 @@
 #ifndef _MEM_ALLOCATOR_
 #define _MEM_ALLOCATOR_
 
-#define ADD_TABLE(coord_,data,size) add_to_list(coord_,data,size)
-#define GET_BY_INDEX(index,out_)
-
+#define SET_CELL(cell) add_to_list(&cell.c,cell.value);
+#define GET_CELL(cell) get_by_cell(&cell.c);
 
 struct list
 {
   struct list *next;
   struct list *prev;
-   
   unsigned long count;
   unsigned long hash;
-  char *data;
+  unsigned int  value;
 };
 
 static struct list *first_list_obj = NULL;
 static struct list *last_list_obj  = NULL;
 static struct list *total_list_obj = NULL;
 
- void __stdcall add_to_list(coordinates *coord_ , char *data_ , unsigned int size_);
- char __stdcall list_started();
- //void __stdcall list_init(char *data_ , unsigned int size_);
- void __stdcall list_init(coordinates *coord_,char *data_ , unsigned int size_);
- void __stdcall list_add();
-void __stdcall list_next(coordinates *coord_,char *data_,unsigned long size_);
- void __stdcall list_prev(char **out);
- void __stdcall get_by_index(unsigned int index_,char **out);
- void __stdcall get_by_coord(coordinates *coord_,char **out);
- unsigned int __stdcall list_count();
-
-
-
+ void  add_to_list(struct coordinates *cell ,
+               unsigned int value);
+ char  list_started(void);
+ void  list_init(struct coordinates *cell,unsigned int value);
+ void  list_add(void);
+ void  list_next(struct coordinates *cell,unsigned int value);
+ unsigned long list_prev();
+ unsigned int get_by_index(unsigned int index_);
+ unsigned int get_by_cell(struct coordinates *cell);
+ unsigned int list_count();
 #endif
 
 
