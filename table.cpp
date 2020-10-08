@@ -19,6 +19,8 @@ void set_cell_(char *str_)
 }
 
 
+
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	const unsigned long cell_count = 5;
@@ -49,13 +51,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	set_cell_("F4:1");
 	set_cell_("F5:2");
 	
+	unsigned int min = 10;
+	unsigned int max = 0;
+	_cell cell;
+    cell.value = 0;
 	for (unsigned char  i = 1; i < 6; ++i)
 	{
        char str[10];
 	   sprintf_s(str,"A%d:0",i);
-	   _cell cell = SET_CELL(str);
+	   cell = SET_CELL(str);
 	   GET_CELL(cell);
-	   printf(":%d\n",cell.value);
+	   if (cell.value < min)
+	       {min = cell.value;}
+	   if (cell.value > max)
+	       {max = cell.value;}
+
+//	   printf(":%d\n",cell.value);
 	}
 	return (0);
 }
