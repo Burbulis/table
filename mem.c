@@ -23,7 +23,7 @@ void list_init(struct coordinates *cell,unsigned int value)
   total_list_obj->value = value;
   total_list_obj->count = 0;
   total_list_obj->hash = rehasher(cell);
-  printf("!!(%c,%ld)hash_x=%zd\n",cell->name,cell->index,total_list_obj->hash);
+  //printf("[%c,%ld](hash_x=%ld)=%d\n",cell->name,cell->index,total_list_obj->hash,total_list_obj->value);
   first_list_obj = total_list_obj;
   return ;
 }
@@ -44,7 +44,7 @@ void  list_next(struct coordinates *cell,unsigned int value)
   total_list_obj->value = value;
   total_list_obj->count++;
   total_list_obj->hash = rehasher(cell);
-  printf("(%c,%ld)hash_x=%zd\n",cell->name,cell->index,total_list_obj->hash);
+ //printf("[%c,%ld](hash_x=%ld)=%d\n",cell->name,cell->index,total_list_obj->hash,total_list_obj->value);
   last_list_obj=total_list_obj;
 } 
 
@@ -75,7 +75,7 @@ unsigned int  get_by_index(unsigned int index_)
 unsigned int get_by_cell(struct coordinates *cell)
 {
  unsigned long hash_x = rehasher(cell); 
- printf("hash_x=%zd\n",hash_x);
+ //printf("hash_x=%zd\n",hash_x);
  unsigned int value = 0;
  struct list *iterator = first_list_obj;
  unsigned long counter_ = last_list_obj->count;
@@ -84,17 +84,18 @@ unsigned int get_by_cell(struct coordinates *cell)
    unsigned long hash_ = iterator->hash;
    if (iterator->count == counter_)
    {
-     printf("not detected!!!\n\n");
+    // printf("not detected!!!\n\n");
      break;
    }
    if (hash_ == hash_x)
    {
      value = iterator->value;
-     printf("detected!!!\n\n");
+     printf("detected!!! = %d\n\n",value);
      break;
   }
   iterator = iterator->next;
  }
+ printf("val_ = %d\n",value);
  return (value);
 }
 

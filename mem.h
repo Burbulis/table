@@ -6,7 +6,7 @@
 #define _MEM_ALLOCATOR_
 
 #define SET_CELL(cell) add_to_list(&cell.c,cell.value);
-#define GET_CELL(cell) get_by_cell(&cell.c);
+#define GET_CELL(cell) cell.value = get_by_cell(&cell.c);
 
 struct list
 {

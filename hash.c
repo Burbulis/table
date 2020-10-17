@@ -18,16 +18,22 @@ unsigned long
 	unsigned long count_ = cell->index; 
 	unsigned long xt = get_hash(cell->index);
 	count_ = (!count_)?xt % 8:count_; 
-	double pw_x = pow((double)get_hash(count_++)*0.0001,(double)(count_++*0.0001));
+	double pw_x = get_hash(++count_)*(get_hash(++count_)*(++count_));
      
-	 unsigned long hx_ = ((count_ * get_hash(cell->name) * xt)/*+(cell->name * get_hash(++cell->name) )+(xt * get_hash(cell->name))+pw_x)/(get_hash(cell
-->name)*xt*/);
+	 unsigned long hx_ = (count_ * (get_hash(cell->name) + get_hash(xt%4))+(cell->name * get_hash(cell->name + 3) ));
+	 /*+(xt * get_hash(cell->name))+pw_x)/(get_hash(cell->name)*xt)*/
      return (hx_); 
   }
 
   unsigned long get_hash(unsigned long index)
   {
-   unsigned long table_[100] ={ 
+
+   if (index > 100)
+   {
+     index = index%3;
+     //printf("___idx:%ld\n",index);
+   }
+   unsigned long table_[100] ={
     648687483  ,683824344 ,1495049347,709689785 ,1222405562,1881988445,134270440 ,1981503013,205812075 ,112108094 ,
     1662636853 ,557232430 ,996216384 ,1984887188,1070103423,950841699 ,1530098776,1253449776,960968108 ,1651253500,
     1900641    ,1747571880,1965510065,2016171082,1581591246,23838492  ,2128279176,746701910 ,235138301 ,724210199 ,

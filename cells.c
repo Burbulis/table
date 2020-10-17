@@ -2,9 +2,9 @@
 
 struct coordinates to_cell(char *cell_str)
 {
-	char cell_name[]="ABCDE";
-	char cell_index[]="01234";
-	unsigned int cell_idx[] = {0,1,2,3,4};
+	char cell_name[]="ABCDEF";
+	char cell_index[]="0123456";
+	unsigned int cell_idx[] = {0,1,2,3,4,5,6};
 	char *x_name = NULL;
 	char *x_index = NULL;
 	unsigned int i_name , i_idx;
@@ -28,11 +28,13 @@ struct coordinates to_cell(char *cell_str)
 	  }
 	}
 	struct coordinates cell;
+
 	if ((!!x_name)&&(!!x_index))
 	{
 		cell.name  = cell_name[i_name];
 		cell.index = cell_idx[i_idx];
 	}
+
 	return (cell);
 }
 
